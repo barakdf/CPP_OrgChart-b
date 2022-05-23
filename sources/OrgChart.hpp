@@ -28,21 +28,41 @@ namespace ariel {
         class Node {
         private:
             std::string title;
-            Node* parent;
-            std::vector<Node*> childs;
             int _size;
+
             size_t index;
 
+            size_t level;
         public:
-            Node(std::string  title, size_t _index):title(std::move(title)), parent(nullptr), _size(0), index(_index){}
+
+            Node* parent;
+            Node* left;
+            Node* right;
+            std::vector<Node*> children;
+            Node(std::string  title, size_t _index, size_t _level, Node* _parent = nullptr, Node* _left = nullptr, Node* _right = nullptr):
+            title(std::move(title)), _size(0), index(_index), level(_level), parent(_parent), left(_left), right(_right){}
+
+            size_t length();
+
+            char at(size_t i) {
+                return this->title.at(i);
+            }
+
+
 
             void add_child(Node* child);
 
-            const std::string & _title();
+            std::string & _title();
+
+            size_t _level() const;
+
+//            Node* _right() {
+//                return (this->right);
+//            }
 
             void set_title(std::string _title);
 
-            size_t get_num_childs();
+            size_t get_num_children() const;
 
             int size();
 
@@ -52,10 +72,12 @@ namespace ariel {
     private:
         Node *root;
         /* map of members for O(1) search of a member node */
-        std::unordered_map<std::string, Node> members;
+        std::unordered_map<int,Node *> levels;
 
 
     public:
+        std::unordered_map<std::string, Node> members;
+
         OrgChart() : root(nullptr) {}
 
         OrgChart &add_root(const std::string& title);
@@ -74,10 +96,11 @@ namespace ariel {
          * this class will contain all the common implementation of tha sub behave iterators.*/
 
         class Iterator {
-        private:
+        protected:
             Node *pointer_to_current_node;
         public:
-            Iterator(Node *ptr = nullptr): pointer_to_current_node(ptr){}
+            Iterator(Node *ptr): pointer_to_current_node(ptr){}
+            Iterator(const Iterator &other);
 
             Iterator &operator=(const Iterator &);
 
@@ -122,7 +145,7 @@ namespace ariel {
     /* LEVEL ORDER CLASS */
     class LevelOrder: public OrgChart::Iterator {
     public:
-        explicit LevelOrder(OrgChart::Node *ptr = nullptr)
+        LevelOrder(OrgChart::Node *ptr = nullptr)
                 : Iterator(ptr) {}
 
         LevelOrder& operator++();
@@ -134,7 +157,7 @@ namespace ariel {
     /* REVERSE LEVEL ORDER CLASS */
     class ReverseLevelOrder:public OrgChart::Iterator {
     public:
-        explicit ReverseLevelOrder(OrgChart::Node *ptr = nullptr)
+        ReverseLevelOrder(OrgChart::Node *ptr = nullptr)
                 : Iterator(ptr) {}
 
         ReverseLevelOrder& operator++();
@@ -148,7 +171,7 @@ namespace ariel {
     class PreOrder:public OrgChart::Iterator {
 
     public:
-        explicit PreOrder(OrgChart::Node *ptr = nullptr)
+        PreOrder(OrgChart::Node *ptr)
                 : Iterator(ptr) {}
 
         PreOrder& operator++();

@@ -74,12 +74,12 @@ clean: CMakeFiles/CPP_OrgChart_b.dir/clean
 CMakeFiles/CPP_OrgChart_b.dir/all:
 	$(MAKE) -f CMakeFiles/CPP_OrgChart_b.dir/build.make CMakeFiles/CPP_OrgChart_b.dir/depend
 	$(MAKE) -f CMakeFiles/CPP_OrgChart_b.dir/build.make CMakeFiles/CPP_OrgChart_b.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target CPP_OrgChart_b"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target CPP_OrgChart_b"
 .PHONY : CMakeFiles/CPP_OrgChart_b.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/CPP_OrgChart_b.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/cmake-build-debug/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/CPP_OrgChart_b.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/CPP_OrgChart_b.dir/rule

@@ -57,30 +57,45 @@ include CMakeFiles/CPP_OrgChart_b.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/CPP_OrgChart_b.dir/flags.make
 
-CMakeFiles/CPP_OrgChart_b.dir/main.cpp.o: CMakeFiles/CPP_OrgChart_b.dir/flags.make
-CMakeFiles/CPP_OrgChart_b.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/CPP_OrgChart_b.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CPP_OrgChart_b.dir/main.cpp.o -c /mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/main.cpp
+CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.o: CMakeFiles/CPP_OrgChart_b.dir/flags.make
+CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.o: ../sources/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.o -c /mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/main.cpp
 
-CMakeFiles/CPP_OrgChart_b.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CPP_OrgChart_b.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/main.cpp > CMakeFiles/CPP_OrgChart_b.dir/main.cpp.i
+CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/main.cpp > CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.i
 
-CMakeFiles/CPP_OrgChart_b.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CPP_OrgChart_b.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/main.cpp -o CMakeFiles/CPP_OrgChart_b.dir/main.cpp.s
+CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/main.cpp -o CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.s
+
+CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.o: CMakeFiles/CPP_OrgChart_b.dir/flags.make
+CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.o: ../sources/OrgChart.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.o -c /mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/OrgChart.cpp
+
+CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/OrgChart.cpp > CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.i
+
+CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/OrgChart.cpp -o CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.s
 
 # Object files for target CPP_OrgChart_b
 CPP_OrgChart_b_OBJECTS = \
-"CMakeFiles/CPP_OrgChart_b.dir/main.cpp.o"
+"CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.o" \
+"CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.o"
 
 # External object files for target CPP_OrgChart_b
 CPP_OrgChart_b_EXTERNAL_OBJECTS =
 
-CPP_OrgChart_b: CMakeFiles/CPP_OrgChart_b.dir/main.cpp.o
+CPP_OrgChart_b: CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.o
+CPP_OrgChart_b: CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.o
 CPP_OrgChart_b: CMakeFiles/CPP_OrgChart_b.dir/build.make
 CPP_OrgChart_b: CMakeFiles/CPP_OrgChart_b.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable CPP_OrgChart_b"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable CPP_OrgChart_b"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CPP_OrgChart_b.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

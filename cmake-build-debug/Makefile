@@ -123,32 +123,59 @@ CPP_OrgChart_b/fast:
 	$(MAKE) -f CMakeFiles/CPP_OrgChart_b.dir/build.make CMakeFiles/CPP_OrgChart_b.dir/build
 .PHONY : CPP_OrgChart_b/fast
 
-main.o: main.cpp.o
+sources/OrgChart.o: sources/OrgChart.cpp.o
 
-.PHONY : main.o
+.PHONY : sources/OrgChart.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/CPP_OrgChart_b.dir/build.make CMakeFiles/CPP_OrgChart_b.dir/main.cpp.o
-.PHONY : main.cpp.o
+sources/OrgChart.cpp.o:
+	$(MAKE) -f CMakeFiles/CPP_OrgChart_b.dir/build.make CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.o
+.PHONY : sources/OrgChart.cpp.o
 
-main.i: main.cpp.i
+sources/OrgChart.i: sources/OrgChart.cpp.i
 
-.PHONY : main.i
+.PHONY : sources/OrgChart.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/CPP_OrgChart_b.dir/build.make CMakeFiles/CPP_OrgChart_b.dir/main.cpp.i
-.PHONY : main.cpp.i
+sources/OrgChart.cpp.i:
+	$(MAKE) -f CMakeFiles/CPP_OrgChart_b.dir/build.make CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.i
+.PHONY : sources/OrgChart.cpp.i
 
-main.s: main.cpp.s
+sources/OrgChart.s: sources/OrgChart.cpp.s
 
-.PHONY : main.s
+.PHONY : sources/OrgChart.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/CPP_OrgChart_b.dir/build.make CMakeFiles/CPP_OrgChart_b.dir/main.cpp.s
-.PHONY : main.cpp.s
+sources/OrgChart.cpp.s:
+	$(MAKE) -f CMakeFiles/CPP_OrgChart_b.dir/build.make CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.s
+.PHONY : sources/OrgChart.cpp.s
+
+sources/main.o: sources/main.cpp.o
+
+.PHONY : sources/main.o
+
+# target to build an object file
+sources/main.cpp.o:
+	$(MAKE) -f CMakeFiles/CPP_OrgChart_b.dir/build.make CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.o
+.PHONY : sources/main.cpp.o
+
+sources/main.i: sources/main.cpp.i
+
+.PHONY : sources/main.i
+
+# target to preprocess a source file
+sources/main.cpp.i:
+	$(MAKE) -f CMakeFiles/CPP_OrgChart_b.dir/build.make CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.i
+.PHONY : sources/main.cpp.i
+
+sources/main.s: sources/main.cpp.s
+
+.PHONY : sources/main.s
+
+# target to generate assembly for a file
+sources/main.cpp.s:
+	$(MAKE) -f CMakeFiles/CPP_OrgChart_b.dir/build.make CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.s
+.PHONY : sources/main.cpp.s
 
 # Help Target
 help:
@@ -159,9 +186,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... CPP_OrgChart_b"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... sources/OrgChart.o"
+	@echo "... sources/OrgChart.i"
+	@echo "... sources/OrgChart.s"
+	@echo "... sources/main.o"
+	@echo "... sources/main.i"
+	@echo "... sources/main.s"
 .PHONY : help
 
 

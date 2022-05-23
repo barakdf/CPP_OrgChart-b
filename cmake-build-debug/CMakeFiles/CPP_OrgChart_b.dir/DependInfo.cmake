@@ -4,7 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/main.cpp" "/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/cmake-build-debug/CMakeFiles/CPP_OrgChart_b.dir/main.cpp.o"
+  "/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/OrgChart.cpp" "/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/cmake-build-debug/CMakeFiles/CPP_OrgChart_b.dir/sources/OrgChart.cpp.o"
+  "/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/main.cpp" "/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/cmake-build-debug/CMakeFiles/CPP_OrgChart_b.dir/sources/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

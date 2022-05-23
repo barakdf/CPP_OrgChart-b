@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/OrgChart.hpp
+iostream
+-
+iterator
+-
+utility
+-
+vector
+-
+unordered_map
+-
+
+/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/main.cpp
+iostream
+-
+OrgChart.hpp
+/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/OrgChart.hpp
+

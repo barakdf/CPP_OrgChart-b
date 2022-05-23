@@ -82,7 +82,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/main.cpp">
+		<Unit filename="/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/OrgChart.cpp">
+			<Option target="CPP_OrgChart_b"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/OrgChart.hpp">
+			<Option target="CPP_OrgChart_b"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/main.cpp">
 			<Option target="CPP_OrgChart_b"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/CMakeLists.txt">
