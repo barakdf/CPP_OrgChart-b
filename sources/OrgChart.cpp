@@ -7,12 +7,10 @@
 #include <utility>
 
 
-
-
 using namespace ariel;
 
 OrgChart &OrgChart::add_root(const std::string &title) {
-    int ROOT_INIT = 0;
+    size_t ROOT_INIT = 0;
     if (this->root == nullptr) {
         Node e(title, ROOT_INIT, ROOT_INIT);
         this->members.insert({title, e});
@@ -259,12 +257,10 @@ bool OrgChart::Iterator::operator==(const OrgChart::Iterator &other) {
             return (this->pointer_to_current_node)->_title() == (other.pointer_to_current_node)->_title();
         }
         return false;
-    } else {
-        if (other.pointer_to_current_node == nullptr) {
-            return true;
-        }
-        return false;
     }
+    return other.pointer_to_current_node == nullptr;
+
+
 
 }
 
