@@ -12,19 +12,20 @@ using namespace ariel;
 OrgChart &OrgChart::add_root(const std::string &title) {
     size_t ROOT_INIT = 0;
     if (this->root == nullptr) {
-        Node e(title, ROOT_INIT, ROOT_INIT);
+        Node e(title, ROOT_INIT);
         this->members.insert({title, e});
         this->root = &(this->members.at(title));
+        this->levels.insert({ROOT_INIT, &this->members.at(title)});
     } else {
-//        auto itr = this->members.find(this->root->right)
         std::string name = (this->root)->_title();
         this->members.insert({title, *(this->root)});
         this->members.at(title).set_title(title);
         this->root = &(this->members.at(title));
-//        this->root->set_title(title);
         this->members.erase(name);
+        this->levels.at(ROOT_INIT) = &(this->members.at(title));
 
     }
+
     return *this;
 }
 
@@ -38,21 +39,30 @@ OrgChart &OrgChart::add_sub(const std::string &curr_title, const std::string &ne
     }
     /*make new node with basic data and defaults*/
     Node *parent = &(members.at(curr_title));
-    Node child{new_title, parent->get_num_children(), parent->_level(), parent};
+    Node child{new_title, parent->_level()+1, parent};
+
 
     /* Always happening */
     this->members.insert({new_title, child});
 
+    if (child._level() > this->max_level) {
+        this->levels.insert({child._level(), &(this->members.at(new_title))});
+        this->max_level = child._level();
+    }
     /* setting right node and left node if exist.
      * if no siblings then left node remain null
      * if there is no cousins on left then right node remain null*/
     std::cout << "Parent num of childern " << parent->children.size() << "\n";
     if (!parent->children.empty()) {
+
         Node *temp = &this->members.at(new_title);
+        /* in case there is siblings the new node will set his left pointer to the prev child,
+         * new node will take the prev child right node pointer*/
         this->members.at(new_title).left = parent->children.at(parent->get_num_children() - 1);
         this->members.at(new_title).right = parent->children.at(parent->get_num_children() - 1)->right;
 
-
+        /* if the node to the right of the new node is not null, set the right node left pointer to the new node.
+         * ELSE, the right node of the new node will remain nullptr */
         if (this->members.at(new_title).right != nullptr) {
             parent->right->children.at(0)->left = temp;
         }
@@ -81,7 +91,9 @@ OrgChart &OrgChart::add_sub(const std::string &curr_title, const std::string &ne
     }
 
     this->members.at(curr_title).add_child(&this->members.at(new_title));
-
+    if (this->members.at(new_title).left == nullptr) {
+        this->levels.at(child._level()) = &(this->members.at(new_title));
+    }
 
 //    if (parent->right != nullptr ) {
 //        if (parent->right->children[0] != nullptr) {
@@ -107,7 +119,7 @@ LevelOrder OrgChart::begin_level_order() {
     if (this->root == nullptr) {
         throw std::invalid_argument("Chart is empty\n");
     }
-    return LevelOrder{this->root};
+    return LevelOrder{&(this->levels),this->root};
 }
 
 LevelOrder OrgChart::end_level_order() {
@@ -129,22 +141,23 @@ ReverseLevelOrder OrgChart::begin_reverse_order() {
     if (this->root == nullptr) {
         throw std::invalid_argument("Chart is empty\n");
     }
-    Node *temp = this->root;
+//    Node *temp = this->root;
 
-    while (!temp->children.empty()) {
-        temp = temp->children.at(0);
-        if (temp->children.empty()) {
-            Node *temp2 = temp->right;
-            while (temp2 != nullptr) {
-                if (!(temp2->children.empty())) {
-                    temp = temp2;
-                    break;
-                }
-                temp2 = temp2->right;
 
-            }
-        }
-    }
+//    while (!temp->children.empty()) {
+//        temp = temp->children.at(0);
+//        if (temp->children.empty()) {
+//            Node *temp2 = temp->right;
+//            while (temp2 != nullptr) {
+//                if (!(temp2->children.empty())) {
+//                    temp = temp2;
+//                    break;
+//                }
+//                temp2 = temp2->right;
+//
+//            }
+//        }
+//    }
 
 //    while (true) {
 //        if (!temp->children.empty()) {
@@ -157,14 +170,14 @@ ReverseLevelOrder OrgChart::begin_reverse_order() {
 //    }
 
 
-    return ReverseLevelOrder{temp};
+    return ReverseLevelOrder{&(this->levels),this->levels.at(max_level)};
 }
 
 ReverseLevelOrder OrgChart::reverse_order() {
     if (this->root == nullptr) {
         throw std::invalid_argument("Chart is empty\n");
     }
-    return ReverseLevelOrder{nullptr};
+    return ReverseLevelOrder{};
 }
 
 PreOrder OrgChart::begin_preorder() {
@@ -224,6 +237,8 @@ size_t OrgChart::Node::_level() const {
 size_t OrgChart::Node::length() {
     return this->title.length();
 }
+
+
 
 
 /** Basic Iterator Parent Class */
@@ -291,21 +306,33 @@ ariel::LevelOrder LevelOrder::operator++(int) {
 /* Prefix */
 //TODO
 LevelOrder &LevelOrder::operator++() {
-//    std::cout<< (this->pointer_to_current_node)->_title() << std::endl;
-    if (pointer_to_current_node->right == nullptr) {
-        while (pointer_to_current_node->left != nullptr) {
-            pointer_to_current_node = pointer_to_current_node->left;
-        }
-        while (pointer_to_current_node->children.empty()) {
-            pointer_to_current_node = pointer_to_current_node->right;
-            if (pointer_to_current_node == nullptr) {
-                return *this;
-            }
-        }
-        pointer_to_current_node = pointer_to_current_node->children.at(0);
+    /** handling only by node fields , Less Performance */
+//    if (pointer_to_current_node->right == nullptr) {
+//        while (pointer_to_current_node->left != nullptr) {
+//            pointer_to_current_node = pointer_to_current_node->left;
+//        }
+//        while (pointer_to_current_node->children.empty()) {
+//            pointer_to_current_node = pointer_to_current_node->right;
+//            if (pointer_to_current_node == nullptr) {
+//                return *this;
+//            }
+//        }
+//        pointer_to_current_node = pointer_to_current_node->children.at(0);
+//
+//    } else {
+//        pointer_to_current_node = pointer_to_current_node->right;
+//    }
 
+    /** store ONLY pointer to map, increasing performance.*/
+    if (pointer_to_current_node->right == nullptr) {
+        size_t curr_lvl = pointer_to_current_node->_level();
+        if (this->level->find(curr_lvl + 1) == this->level->end()) {
+            pointer_to_current_node = nullptr;
+            return *this;
+        }
+        this->pointer_to_current_node = this->level->at(curr_lvl + 1);
     } else {
-        pointer_to_current_node = pointer_to_current_node->right;
+        this->pointer_to_current_node = this->pointer_to_current_node->right;
     }
     return *this;
 }
@@ -318,20 +345,39 @@ LevelOrder &LevelOrder::operator++() {
 /* Prefix */
 //TODO
 ReverseLevelOrder &ReverseLevelOrder::operator++() {
-    std::string s = (pointer_to_current_node)->_title();
-    if (pointer_to_current_node->right == nullptr) {
 
-        pointer_to_current_node = pointer_to_current_node->parent;
-        if (pointer_to_current_node == nullptr) {
+    /** handling only by node fields , Less Performance */
+
+//    std::string s = (pointer_to_current_node)->_title();
+//    if (pointer_to_current_node->right == nullptr) {
+//
+//        pointer_to_current_node = pointer_to_current_node->parent;
+//        if (pointer_to_current_node == nullptr) {
+//            return *this;
+//        }
+//        while (pointer_to_current_node->left != nullptr) {
+//            pointer_to_current_node = pointer_to_current_node->left;
+//        }
+//
+//
+//    } else {
+//        pointer_to_current_node = pointer_to_current_node->right;
+//    }
+//    if (pointer_to_current_node->right == nullptr) {
+//        pointer_to_current_node =
+//    }
+
+    /** store ONLY pointer to map, increasing performance.*/
+
+    if (pointer_to_current_node->right == nullptr) {
+        size_t curr_lvl = pointer_to_current_node->_level();
+        if (curr_lvl == 0) {
+            pointer_to_current_node = nullptr;
             return *this;
         }
-        while (pointer_to_current_node->left != nullptr) {
-            pointer_to_current_node = pointer_to_current_node->left;
-        }
-
-
+        this->pointer_to_current_node = this->level->at(curr_lvl - 1);
     } else {
-        pointer_to_current_node = pointer_to_current_node->right;
+        this->pointer_to_current_node = this->pointer_to_current_node->right;
     }
     return *this;
 }

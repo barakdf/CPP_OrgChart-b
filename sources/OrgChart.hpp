@@ -22,13 +22,10 @@ namespace ariel {
     class OrgChart {
 
     public:
-        friend class LevelOrder;
-        friend class ReverseLevelOrder;
-        friend class PreOrder;
         class Node {
         private:
             std::string title;
-            int _size;
+
 
             size_t index;
 
@@ -39,10 +36,11 @@ namespace ariel {
             Node* left;
             Node* right;
             std::vector<Node*> children;
-            Node(std::string  title, size_t _index, size_t _level, Node* _parent = nullptr, Node* _left = nullptr, Node* _right = nullptr):
-            title(std::move(title)), _size(0), index(_index), level(_level), parent(_parent), left(_left), right(_right){}
+            Node(std::string  title, size_t _level, Node* _parent = nullptr, Node* _left = nullptr, Node* _right = nullptr):
+            title(std::move(title)), level(_level), parent(_parent), left(_left), right(_right){}
 
             size_t length();
+            size_t _level() const;
 
             char at(size_t i) {
                 return this->title.at(i);
@@ -53,12 +51,6 @@ namespace ariel {
             void add_child(Node* child);
 
             std::string & _title();
-
-            size_t _level() const;
-
-//            Node* _right() {
-//                return (this->right);
-//            }
 
             void set_title(std::string _title);
 
@@ -71,14 +63,15 @@ namespace ariel {
 
     private:
         Node *root;
+        size_t max_level;
         /* map of members for O(1) search of a member node */
-        std::unordered_map<int,Node *> levels;
+        std::unordered_map<size_t,Node *> levels;
 
 
     public:
         std::unordered_map<std::string, Node> members;
 
-        OrgChart() : root(nullptr) {}
+        OrgChart() : root(nullptr), max_level(0) {}
 
         OrgChart &add_root(const std::string& title);
 
@@ -144,9 +137,10 @@ namespace ariel {
 
     /* LEVEL ORDER CLASS */
     class LevelOrder: public OrgChart::Iterator {
+        std::unordered_map<size_t, OrgChart::Node *> *level;
     public:
-        LevelOrder(OrgChart::Node *ptr = nullptr)
-                : Iterator(ptr) {}
+        LevelOrder(std::unordered_map<size_t, OrgChart::Node *>* levels = nullptr, OrgChart::Node *ptr = nullptr)
+                :level(levels), Iterator(ptr) {}
 
         LevelOrder& operator++();
         LevelOrder operator++(int );
@@ -156,9 +150,10 @@ namespace ariel {
 
     /* REVERSE LEVEL ORDER CLASS */
     class ReverseLevelOrder:public OrgChart::Iterator {
+        std::unordered_map<size_t, OrgChart::Node *>* level;
     public:
-        ReverseLevelOrder(OrgChart::Node *ptr = nullptr)
-                : Iterator(ptr) {}
+        ReverseLevelOrder(std::unordered_map<size_t, OrgChart::Node *> * levels  = nullptr, OrgChart::Node *ptr = nullptr)
+                : level(levels),Iterator(ptr) {}
 
         ReverseLevelOrder& operator++();
         ReverseLevelOrder operator++(int );
@@ -169,7 +164,6 @@ namespace ariel {
 
     /* PRE ORDER CLASS */
     class PreOrder:public OrgChart::Iterator {
-
     public:
         PreOrder(OrgChart::Node *ptr)
                 : Iterator(ptr) {}
