@@ -27,9 +27,9 @@ namespace ariel {
             std::string title;
 
 
-            size_t index;
-
             size_t level;
+
+            size_t index;
         public:
 
             Node* parent;
@@ -42,9 +42,7 @@ namespace ariel {
             size_t length();
             size_t _level() const;
 
-            char at(size_t i) {
-                return this->title.at(i);
-            }
+            char at(size_t i);
 
 
 
@@ -63,12 +61,16 @@ namespace ariel {
 
     private:
         Node *root;
+        /* store the max level of the tree, for fast assign reverseOrder begin node */
         size_t max_level;
         /* map of members for O(1) search of a member node */
         std::unordered_map<size_t,Node *> levels;
 
 
     public:
+        /* map that store the nodes in the tree by <title,Node>
+         * this data structure is use to store all data
+         * and for fast pull node object for the add_sub and add_root methods.*/
         std::unordered_map<std::string, Node> members;
 
         OrgChart() : root(nullptr), max_level(0) {}
