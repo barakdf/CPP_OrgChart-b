@@ -231,10 +231,7 @@ size_t OrgChart::Node::length() {
 OrgChart::Iterator::Iterator(const OrgChart::Iterator &other) : pointer_to_current_node(
         other.pointer_to_current_node) {}
 
-OrgChart::Iterator &OrgChart::Iterator::operator=(const OrgChart::Iterator &other) {
-    this->pointer_to_current_node = other.pointer_to_current_node;
-    return *this;
-}
+OrgChart::Iterator &OrgChart::Iterator::operator=(const OrgChart::Iterator &other) = default;
 
 const std::string &OrgChart::Iterator::operator*() const {
     if (this->pointer_to_current_node == nullptr) {
@@ -284,7 +281,7 @@ bool OrgChart::Iterator::operator!=(const OrgChart::Iterator &other) {
 
 /* Postfix */
 //TODO
-const ariel::LevelOrder LevelOrder::operator++(int) {
+ariel::LevelOrder LevelOrder::operator++(int) {
     auto temp = *this;
     ++(*this);
     return temp;
@@ -341,7 +338,7 @@ ReverseLevelOrder &ReverseLevelOrder::operator++() {
 
 /* Postfix */
 //TODO
-const ReverseLevelOrder ReverseLevelOrder::operator++(int) {
+ReverseLevelOrder ReverseLevelOrder::operator++(int) {
     auto temp = *this;
     ++(*this);
     return temp;
@@ -384,7 +381,7 @@ PreOrder &PreOrder::operator++() {
 
 /* Postfix */
 //TODO
-const PreOrder PreOrder::operator++(int) {
+PreOrder PreOrder::operator++(int) {
     auto temp = *this;
     ++(*this);
     return temp;

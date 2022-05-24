@@ -149,7 +149,7 @@ namespace ariel {
                 : Iterator(ptr) {}
 
         LevelOrder& operator++();
-        const LevelOrder operator++(int );
+        LevelOrder operator++(int );
 
     };
 
@@ -161,7 +161,7 @@ namespace ariel {
                 : Iterator(ptr) {}
 
         ReverseLevelOrder& operator++();
-        const ReverseLevelOrder operator++(int );
+        ReverseLevelOrder operator++(int );
 
 
     };
@@ -175,7 +175,7 @@ namespace ariel {
                 : Iterator(ptr) {}
 
         PreOrder& operator++();
-        const PreOrder operator++(int );
+        PreOrder operator++(int );
 
 
 
