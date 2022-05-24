@@ -4,7 +4,6 @@
 
 #include "OrgChart.hpp"
 
-#include <utility>
 
 
 using namespace ariel;
@@ -321,7 +320,6 @@ bool OrgChart::Iterator::operator==(const OrgChart::Iterator &other) {
 
 }
 
-//TODO
 bool OrgChart::Iterator::operator!=(const OrgChart::Iterator &other) {
 
     return !(*this == other);
@@ -452,13 +450,18 @@ ReverseLevelOrder ReverseLevelOrder::operator++(int) {
 
 
 /* Prefix */
-
+/** check if the parent is null, if true then its the root and the next node will be hes first child and return.
+ *  if the current node does not have children, than he is a leaf, while the child is not the last child,
+ *  the current node will be the right sibling,
+ *  if the child is the last child then we move to the parent->right (if exist)
+ *  if the same operation leads to the root, the current node is the last -> return nullptr.
+ *  */
 PreOrder &PreOrder::operator++() {
     if (this->pointer_to_current_node->parent == nullptr) {
         if (!this->pointer_to_current_node->children.empty()) {
             this->pointer_to_current_node = this->pointer_to_current_node->children.at(0);
         } else {
-            this->pointer_to_current_node = this->pointer_to_current_node->parent;
+            this->pointer_to_current_node = nullptr;
         }
         return *this;
     }
@@ -470,8 +473,9 @@ PreOrder &PreOrder::operator++() {
                        this->pointer_to_current_node->parent->get_num_children() - 1)) {
 
             this->pointer_to_current_node = this->pointer_to_current_node->parent;
+            /* check if the "recursion" got up to the root - means that it is the last node.*/
             if (this->pointer_to_current_node->parent == nullptr) {
-                this->pointer_to_current_node = this->pointer_to_current_node->parent;
+                this->pointer_to_current_node = nullptr;
                 return *this;
             }
         }
@@ -481,7 +485,6 @@ PreOrder &PreOrder::operator++() {
 }
 
 /* Postfix */
-//TODO
 PreOrder PreOrder::operator++(int) {
     auto temp = *this;
     ++(*this);
