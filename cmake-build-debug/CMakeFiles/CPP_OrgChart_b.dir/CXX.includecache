@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/OrgChart.cpp
-OrgChart.hpp
-/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/OrgChart.hpp
-utility
--
-
 /mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/OrgChart.hpp
 iostream
 -
@@ -23,4 +17,10 @@ vector
 -
 unordered_map
 -
+
+/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/main.cpp
+iostream
+-
+OrgChart.hpp
+/mnt/c/Users/barak/Documents/GitHub/CPP_OrgChart-b/sources/OrgChart.hpp
 

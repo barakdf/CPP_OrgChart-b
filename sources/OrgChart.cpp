@@ -8,6 +8,8 @@
 
 using namespace ariel;
 
+/** --------------------------------- OrgChart --------------------------------*/
+
 /** add_root method is using to add a new root or to update the existing one,
  * check if root is null (does not initialized yet),
  * Case True -> create a new node, insert the node to the member map(main collection of nodes for quick pull)
@@ -217,7 +219,23 @@ PreOrder OrgChart::end_preorder() {
 
 /** cout operator for the whole chart */
 std::ostream &ariel::operator<<(std::ostream &ostream, OrgChart &orgChart) {
-    ostream << "hi";
+
+    for (auto iter = orgChart.levels.begin(); iter != orgChart.levels.end(); ++iter ) {
+        OrgChart::Node *e = iter->second;
+        size_t counter = 0;
+        while (e != nullptr) {
+            ostream << "  " <<e->_title() << "  ";
+            counter++;
+
+            e = e->right;
+
+        }
+        ostream << "\n";
+        for (int i = 0; i < counter; ++i) {
+            ostream << "----||----";
+        }
+        ostream << "\n";
+    }
     return ostream;
 }
 
@@ -301,13 +319,13 @@ OrgChart::Node *OrgChart::Iterator::operator->() const {
     return this->pointer_to_current_node;
 }
 
-/* Boolean */
-
-bool OrgChart::Iterator::operator==(const OrgChart::Iterator &other) {
-    /*check if the left node is nullptr,
+/** Boolean */
+/**check if the left node is nullptr,
      *      Case False -> check if the other node is nullptr,
      *                          Case True -> return false  otherwise return (left node title == right node title)
      *      Otherwise, return (left node == nullptr) */
+bool OrgChart::Iterator::operator==(const OrgChart::Iterator &other) {
+
 
     if (this->pointer_to_current_node != nullptr) {
         if (other.pointer_to_current_node != nullptr) {
