@@ -19,10 +19,15 @@ namespace ariel {
    class ReverseLevelOrder;
    class PreOrder;
 
+
     class OrgChart {
 
     public:
         class Node {
+            friend class OrgChart;
+            friend class LevelOrder;
+            friend class ReverseLevelOrder;
+            friend class PreOrder;
         private:
             std::string title;
 
@@ -30,21 +35,27 @@ namespace ariel {
             size_t level;
 
             size_t index;
-        public:
-
             Node* parent;
             Node* left;
             Node* right;
+
             std::vector<Node*> children;
+        public:
             Node(std::string  title, size_t _level, Node* _parent = nullptr, Node* _left = nullptr, Node* _right = nullptr):
-            title(std::move(title)), level(_level), parent(_parent), left(_left), right(_right){}
+            title(std::move(title)), level(_level), parent(_parent), left(_left), right(_right), index(0){}
 
             size_t length();
             size_t _level() const;
 
             char at(size_t i);
 
+            Node * get_right() {
+                return right;
+            }
 
+            bool if_null() {
+                return this->right == nullptr;
+            }
 
             void add_child(Node* child);
 
@@ -66,12 +77,12 @@ namespace ariel {
         /* map of members for O(1) search of a member node */
         std::unordered_map<size_t,Node *> levels;
 
-
-    public:
         /* map that store the nodes in the tree by <title,Node>
          * this data structure is use to store all data
          * and for fast pull node object for the add_sub and add_root methods.*/
         std::unordered_map<std::string, Node> members;
+    public:
+
 
         OrgChart() : root(nullptr), max_level(0) {}
 
@@ -91,13 +102,17 @@ namespace ariel {
          * this class will contain all the common implementation of tha sub behave iterators.*/
 
         class Iterator {
-        protected:
-            Node *pointer_to_current_node;
+        private:
+            Node *Ppointer_to_current_node;
         public:
-            Iterator(Node *ptr): pointer_to_current_node(ptr){}
-            Iterator(const Iterator &other);
+            Iterator(Node *ptr): Ppointer_to_current_node(ptr){}
 
-            Iterator &operator=(const Iterator &);
+            void set_pointer(Node *node) {
+                this->Ppointer_to_current_node = node;
+            }
+//            Iterator(const Iterator &other);
+
+//            Iterator &operator=(const Iterator &);
 
             //            Node & operator&() const;
             Node * operator->() const;
@@ -140,9 +155,10 @@ namespace ariel {
     /* LEVEL ORDER CLASS */
     class LevelOrder: public OrgChart::Iterator {
         std::unordered_map<size_t, OrgChart::Node *> *level;
+        OrgChart::Node *pointer_to_current_node;
     public:
         LevelOrder(std::unordered_map<size_t, OrgChart::Node *>* levels = nullptr, OrgChart::Node *ptr = nullptr)
-                :level(levels), Iterator(ptr) {}
+                :level(levels),pointer_to_current_node(ptr), Iterator(ptr) {}
 
         LevelOrder& operator++();
         LevelOrder operator++(int );
@@ -153,9 +169,10 @@ namespace ariel {
     /* REVERSE LEVEL ORDER CLASS */
     class ReverseLevelOrder:public OrgChart::Iterator {
         std::unordered_map<size_t, OrgChart::Node *>* level;
+        OrgChart::Node *pointer_to_current_node;
     public:
         ReverseLevelOrder(std::unordered_map<size_t, OrgChart::Node *> * levels  = nullptr, OrgChart::Node *ptr = nullptr)
-                : level(levels),Iterator(ptr) {}
+                : level(levels),pointer_to_current_node(ptr),Iterator(ptr) {}
 
         ReverseLevelOrder& operator++();
         ReverseLevelOrder operator++(int );
@@ -166,9 +183,10 @@ namespace ariel {
 
     /* PRE ORDER CLASS */
     class PreOrder:public OrgChart::Iterator {
+        OrgChart::Node *pointer_to_current_node;
     public:
         PreOrder(OrgChart::Node *ptr)
-                : Iterator(ptr) {}
+                : pointer_to_current_node(ptr),Iterator(ptr) {}
 
         PreOrder& operator++();
         PreOrder operator++(int );

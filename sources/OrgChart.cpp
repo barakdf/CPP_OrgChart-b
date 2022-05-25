@@ -227,7 +227,7 @@ std::ostream &ariel::operator<<(std::ostream &ostream, OrgChart &orgChart) {
             ostream << "  " <<e->_title() << "  ";
             counter++;
 
-            e = e->right;
+            e = e->get_right();
 
         }
         ostream << "\n";
@@ -296,27 +296,27 @@ size_t OrgChart::Node::_level() const {
 
 /** Basic Iterator Parent Class */
 
-OrgChart::Iterator::Iterator(const OrgChart::Iterator &other):pointer_to_current_node(other.pointer_to_current_node) {};
+//OrgChart::Iterator::Iterator(const OrgChart::Iterator &other):pointer_to_current_node(other.pointer_to_current_node) {};
 
 /* assignment operator is defined as default,
  * no heap data need to be handled and no delete methods implemented.
  * */
-OrgChart::Iterator &OrgChart::Iterator::operator=(const OrgChart::Iterator &other) = default;
+//OrgChart::Iterator &OrgChart::Iterator::operator=(const OrgChart::Iterator &other) = default;
 
 const std::string &OrgChart::Iterator::operator*() const {
     /* check if the pointer is null,
      * Case True -> throw exception.
      * Otherwise, return the current node title.*/
-    if (this->pointer_to_current_node == nullptr) {
+    if (this->Ppointer_to_current_node == nullptr) {
         throw std::invalid_argument("NULL PTR\n");
     }
 
-    return (this->pointer_to_current_node)->_title();
+    return (this->Ppointer_to_current_node)->_title();
 }
 
 /* return the current node pointer */
 OrgChart::Node *OrgChart::Iterator::operator->() const {
-    return this->pointer_to_current_node;
+    return this->Ppointer_to_current_node;
 }
 
 /** Boolean */
@@ -327,13 +327,13 @@ OrgChart::Node *OrgChart::Iterator::operator->() const {
 bool OrgChart::Iterator::operator==(const OrgChart::Iterator &other) {
 
 
-    if (this->pointer_to_current_node != nullptr) {
-        if (other.pointer_to_current_node != nullptr) {
-            return (this->pointer_to_current_node)->_title() == (other.pointer_to_current_node)->_title();
+    if (this->Ppointer_to_current_node != nullptr) {
+        if (other.Ppointer_to_current_node != nullptr) {
+            return (this->Ppointer_to_current_node)->_title() == (other.Ppointer_to_current_node)->_title();
         }
         return false;
     }
-    return other.pointer_to_current_node == nullptr;
+    return other.Ppointer_to_current_node == nullptr;
 
 
 }
@@ -393,12 +393,14 @@ LevelOrder &LevelOrder::operator++() {
         size_t curr_lvl = pointer_to_current_node->_level();
         if (this->level->find(curr_lvl + 1) == this->level->end()) {
             pointer_to_current_node = nullptr;
+            this->set_pointer(this->pointer_to_current_node);
             return *this;
         }
         this->pointer_to_current_node = this->level->at(curr_lvl + 1);
     } else {
         this->pointer_to_current_node = this->pointer_to_current_node->right;
     }
+    this->set_pointer(this->pointer_to_current_node);
     return *this;
 }
 
@@ -444,12 +446,14 @@ ReverseLevelOrder &ReverseLevelOrder::operator++() {
         size_t curr_lvl = pointer_to_current_node->_level();
         if (curr_lvl == 0) {
             pointer_to_current_node = nullptr;
+            this->set_pointer(this->pointer_to_current_node);
             return *this;
         }
         this->pointer_to_current_node = this->level->at(curr_lvl - 1);
     } else {
         this->pointer_to_current_node = this->pointer_to_current_node->right;
     }
+    this->set_pointer(this->pointer_to_current_node);
     return *this;
 }
 
@@ -481,6 +485,7 @@ PreOrder &PreOrder::operator++() {
         } else {
             this->pointer_to_current_node = nullptr;
         }
+        this->set_pointer(this->pointer_to_current_node);
         return *this;
     }
     if (!this->pointer_to_current_node->children.empty()) {
@@ -494,11 +499,13 @@ PreOrder &PreOrder::operator++() {
             /* check if the "recursion" got up to the root - means that it is the last node.*/
             if (this->pointer_to_current_node->parent == nullptr) {
                 this->pointer_to_current_node = nullptr;
+                this->set_pointer(this->pointer_to_current_node);
                 return *this;
             }
         }
         this->pointer_to_current_node = this->pointer_to_current_node->right;
     }
+    this->set_pointer(this->pointer_to_current_node);
     return *this;
 }
 

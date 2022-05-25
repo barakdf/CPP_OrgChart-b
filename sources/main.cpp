@@ -3,6 +3,7 @@
 //
 //int main() {
 //    using namespace ariel;
+//    using namespace std;
 //    OrgChart Konoha_Shinobi_Ranks;
 //
 //    Konoha_Shinobi_Ranks.add_root("Hokage");
@@ -24,7 +25,7 @@
 //            add_sub("Danzo", "Root");
 //
 //    std::cout << Konoha_Shinobi_Ranks << std::endl;
-//
+////
 //    std::cout << "~~Level Order Ranks\n" << std::endl;
 //    for (auto ninja: Konoha_Shinobi_Ranks) {
 //        std::cout << (ninja) << std::endl;
